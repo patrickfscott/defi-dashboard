@@ -10,6 +10,9 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Log the URL pulling from
+        console.log('Fetching from:', process.env.NEXT_PUBLIC_API_URL);
+
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chain-fees`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
