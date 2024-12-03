@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import ChainFeesVisualization from '../components/ChainFeesVisualization';
+import { ChainFeesData } from '../types/chain';
 
 export default function Home() {
-  const [data, setData] = useState<{ dates: string[], chainData: any } | null>(null);
+  const [data, setData] = useState<ChainFeesData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

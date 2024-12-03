@@ -10,6 +10,13 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+import { ChainFeesData } from '../types/chain';
+
+interface ChainFeesProps {
+  dates: string[];
+  chainData: ChainFeesData['chainData'];
+}
+
 interface ChainData {
   [date: string]: number;
 }
