@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ChainFeesVisualization from '../components/ChainFeesVisualization';
 import { ChainFeesData } from '../types/chain';
+import Navbar from '../components/Navbar';
 
 export default function Home() {
   const [data, setData] = useState<ChainFeesData | null>(null);
@@ -42,9 +43,12 @@ export default function Home() {
   }
 
   return (
-    <main className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-8">DeFi Chain Fees Dashboard</h1>
-      <ChainFeesVisualization dates={data.dates} chainData={data.chainData} />
-    </main>
+    <>
+      <Navbar />
+      <main className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-8">DeFi Chain Fees Dashboard</h1>
+        <ChainFeesVisualization dates={data.dates} chainData={data.chainData} />
+      </main>
+    </>
   );
 }

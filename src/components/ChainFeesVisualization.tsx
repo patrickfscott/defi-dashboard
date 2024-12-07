@@ -147,10 +147,9 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
     return Object.entries(chainData).map(([chain, values]) => {
       const latestDate = dates[dates.length - 1];
       const oneDayAgo = dates[dates.length - 2];
-      const sevenDaysAgo = dates[dates.length - 8];
-      const thirtyDaysAgo = dates[dates.length - 31];
 
       const oneDayFees = values[latestDate] || 0;
+
       const sevenDayFees = Array.from({length: 7})
         .map((_, i) => values[dates[dates.length - 1 - i]] || 0)
         .reduce((a, b) => a + b, 0);
@@ -158,9 +157,19 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
         .map((_, i) => values[dates[dates.length - 1 - i]] || 0)
         .reduce((a, b) => a + b, 0);
 
+      // Previous 7 days (days 8-14)
+      const previousSevenDayFees = Array.from({length: 7})
+        .map((_, i) => values[dates[dates.length - 8 - i]] || 0)
+        .reduce((a, b) => a + b, 0);
+
+      // Previous 30 days (days 31-60)
+      const previousThirtyDayFees = Array.from({length: 30})
+        .map((_, i) => values[dates[dates.length - 31 - i]] || 0)
+        .reduce((a, b) => a + b, 0);
+
       const oneDayChange = ((values[latestDate] - values[oneDayAgo]) / values[oneDayAgo]) * 100;
-      const sevenDayChange = ((sevenDayFees - values[sevenDaysAgo]) / values[sevenDaysAgo]) * 100;
-      const thirtyDayChange = ((thirtyDayFees - values[thirtyDaysAgo]) / values[thirtyDaysAgo]) * 100;
+      const sevenDayChange = ((sevenDayFees / previousSevenDayFees) - 1) * 100;
+      const thirtyDayChange = ((thirtyDayFees / previousThirtyDayFees) - 1) * 100;
 
       return {
         chain,
@@ -378,17 +387,20 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
                       <td className="p-2 text-right text-gray-700">${metrics.sevenDayFees.toLocaleString()}</td>
                       <td className="p-2 text-right text-gray-700">${metrics.thirtyDayFees.toLocaleString()}</td>
                       <td className="p-2 text-right text-gray-700">
-                        <span className={metrics.oneDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                          {metrics.oneDayChange.toFixed(2)}%
-                        </span>
+                      <span className={metrics.oneDayChange === null ? 'text-gray-400' : 
+                        metrics.oneDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
+                        {metrics.oneDayChange === null ? '-' : `${metrics.oneDayChange.toFixed(2)}%`}
+                      </span>
                       </td>
                       <td className="p-2 text-right">
-                        <span className={metrics.sevenDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
+                        <span className={metrics.sevenDayChange === null ? 'text-gray-400' :
+                          metrics.sevenDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
                           {metrics.sevenDayChange.toFixed(2)}%
                         </span>
                       </td>
                       <td className="p-2 text-right">
-                        <span className={metrics.thirtyDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
+                        <span className={metrics.thirtyDayChange === null ? 'text-gray-400' :
+                          metrics.thirtyDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
                           {metrics.thirtyDayChange.toFixed(2)}%
                         </span>
                       </td>
