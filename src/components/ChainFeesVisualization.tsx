@@ -395,13 +395,13 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
                       <td className="p-2 text-right">
                         <span className={metrics.sevenDayChange === null ? 'text-gray-400' :
                           metrics.sevenDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                          {metrics.sevenDayChange.toFixed(2)}%
+                          {metrics.sevenDayChange === null ? '-' : `${metrics.sevenDayChange.toFixed(2)}%`}
                         </span>
                       </td>
                       <td className="p-2 text-right">
                         <span className={metrics.thirtyDayChange === null ? 'text-gray-400' :
                           metrics.thirtyDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                          {metrics.thirtyDayChange.toFixed(2)}%
+                          {metrics.thirtyDayChange === null ? '-' : `${metrics.thirtyDayChange.toFixed(2)}%`}
                         </span>
                       </td>
                     </tr>
