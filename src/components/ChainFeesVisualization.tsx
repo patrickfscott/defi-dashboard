@@ -387,21 +387,21 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
                       <td className="p-2 text-right text-gray-700">${metrics.sevenDayFees.toLocaleString()}</td>
                       <td className="p-2 text-right text-gray-700">${metrics.thirtyDayFees.toLocaleString()}</td>
                       <td className="p-2 text-right text-gray-700">
-                      <span className={metrics.oneDayChange === null ? 'text-gray-400' : 
+                      <span className={metrics.oneDayChange === null || isNaN(metrics.oneDayChange) ? 'text-gray-400' : 
                         metrics.oneDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                        {metrics.oneDayChange === null ? '-' : `${metrics.oneDayChange.toFixed(2)}%`}
+                        {metrics.oneDayChange === null || isNaN(metrics.oneDayChange) ? '-' : `${metrics.oneDayChange.toFixed(2)}%`}
                       </span>
                       </td>
                       <td className="p-2 text-right">
-                        <span className={metrics.sevenDayChange === null ? 'text-gray-400' :
+                        <span className={metrics.sevenDayChange === null || isNaN(metrics.sevenDayChange) ? 'text-gray-400' :
                           metrics.sevenDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                          {metrics.sevenDayChange === null ? '-' : `${metrics.sevenDayChange.toFixed(2)}%`}
+                          {metrics.sevenDayChange === null || isNaN(metrics.sevenDayChange) ? '-' : `${metrics.sevenDayChange.toFixed(2)}%`}
                         </span>
                       </td>
                       <td className="p-2 text-right">
-                        <span className={metrics.thirtyDayChange === null ? 'text-gray-400' :
+                        <span className={metrics.thirtyDayChange === null || isNaN(metrics.thirtyDayChange) ? 'text-gray-400' :
                           metrics.thirtyDayChange >= 0 ? 'text-green-500' : 'text-red-500'}>
-                          {metrics.thirtyDayChange === null ? '-' : `${metrics.thirtyDayChange.toFixed(2)}%`}
+                          {metrics.thirtyDayChange === null || isNaN(metrics.thirtyDayChange) ? '-' : `${metrics.thirtyDayChange.toFixed(2)}%`}
                         </span>
                       </td>
                     </tr>
