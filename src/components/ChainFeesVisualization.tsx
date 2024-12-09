@@ -197,13 +197,13 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
   return (
     <div className="w-full space-y-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-black">Chain Ecosystem Fees</h2>
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+          <h2 className="text-xl font-bold text-black mb-4 md:mb-0">Chain Ecosystem Fees</h2>
           
           {/* Date range controls */}
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             {/* Time frame buttons */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center">
               {(['DAY', 'WEEK', 'MONTH'] as const).map((tf) => (
                 <button
                   key={tf}
@@ -217,7 +217,7 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
               ))}
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center">
               {(['1M', '3M', '1Y', 'MAX'] as const).map((range) => (
                 <button
                   key={range}
@@ -236,7 +236,7 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
             </div>
             
             {/* Custom date range picker */}
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col md:flex-row gap-2 items-center">
               <input
                 type="date"
                 value={customStartDate}
@@ -280,7 +280,7 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
 
         {!showTable ? (
           <>
-          <div className="h-[700px]">
+          <div className="h-[400px] md:h-[700px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
               data={consolidatedData}
@@ -292,10 +292,12 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
                   angle={-45}
                   textAnchor="end"
                   height={60}
+                  tick={{ fontSize: '0.75rem' }}
                 />
                 <YAxis
                   tickFormatter={(value) => `$${value.toLocaleString()}`}
                   width={100}
+                  tick={{ fontSize: '0.75rem' }}
                 />
                 <Tooltip
                   contentStyle={{ 
@@ -344,7 +346,7 @@ const ChainFeesVisualization: React.FC<ChainFeesProps> = ({ dates, chainData }) 
           {/* Metrics Table */}
           <div className="bg-white rounded-lg shadow p-6">
             <h3 className="text-lg font-bold mb-4 text-black">Chain Ecosystem Fees</h3>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto -mx-4 md:mx-0">
               <table className="w-full">
                 <thead>
                   <tr>
